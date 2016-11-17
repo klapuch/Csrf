@@ -19,7 +19,7 @@ final class StoredCsrf implements Csrf {
 	}
 
 	public function protection(): string {
-		return $this->session[self::NAME] = $this->token();
+		return $this->session[self::NAME] = $this->session[self::NAME] ?? $this->token();
 	}
 
 	public function abused(): bool {
