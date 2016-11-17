@@ -18,7 +18,8 @@
 	"nette/tester": "^1.7",
 	"ext-simplexml": "*",
 	"ext-dom": "*",
-	"object-calisthenics/phpcs-calisthenics-rules": "^2.0"
+	"object-calisthenics/phpcs-calisthenics-rules": "^2.0",
+	"sebastian/phpcpd": "*"
   },
   "autoload": {
 	"psr-4": {
