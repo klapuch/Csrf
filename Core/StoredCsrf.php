@@ -29,14 +29,6 @@ final class StoredCsrf implements Csrf {
 	}
 
 	/**
-	 * Twin of the generated token
-	 * @return string
-	 */
-	private function twin(): string {
-		return ($this->get + $this->post)[self::NAME] ?? self::INVALID_TOKEN;
-	}
-
-	/**
 	 * Random generated secure token
 	 * @return string
 	 */
@@ -59,5 +51,13 @@ final class StoredCsrf implements Csrf {
 	 */
 	private function solid(string $token): bool {
 		return $token && strlen($token) >= self::TOKEN_LENGTH;
+	}
+
+	/**
+	 * Twin of the generated token
+	 * @return string
+	 */
+	private function twin(): string {
+		return ($this->get + $this->post)[self::NAME] ?? self::INVALID_TOKEN;
 	}
 }

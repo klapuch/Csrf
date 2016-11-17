@@ -75,7 +75,8 @@ final class StoredCsrf extends Tester\TestCase {
 	}
 
 	public function testMatchedValidProtectionInPost() {
-		$this->session[Csrf\Csrf::NAME] = $this->post[Csrf\Csrf::NAME] = str_repeat('a', 21);
+		$this->session[Csrf\Csrf::NAME] = str_repeat('a', 21);
+		$this->post[Csrf\Csrf::NAME] = str_repeat('a', 21);
 		$csrf = new Csrf\StoredCsrf($this->session, $this->post, $this->get);
 		Assert::false($csrf->abused());
 	}
@@ -88,7 +89,8 @@ final class StoredCsrf extends Tester\TestCase {
 	}
 
 	public function testMatchedValidProtectionInGet() {
-		$this->session[Csrf\Csrf::NAME] = $this->get[Csrf\Csrf::NAME] = str_repeat('a', 22);
+		$this->session[Csrf\Csrf::NAME] = str_repeat('a', 21);
+		$this->get[Csrf\Csrf::NAME] = str_repeat('a', 21);
 		$csrf = new Csrf\StoredCsrf($this->session, $this->post, $this->get);
 		Assert::false($csrf->abused());
 	}
@@ -101,7 +103,9 @@ final class StoredCsrf extends Tester\TestCase {
 	}
 
 	public function testMatchedProtectionInPostAndGet() {
-		$this->session[Csrf\Csrf::NAME] = $this->post[Csrf\Csrf::NAME] = $this->get[Csrf\Csrf::NAME] = str_repeat('a', 20);
+		$this->session[Csrf\Csrf::NAME] = str_repeat('a', 20);
+		$this->get[Csrf\Csrf::NAME] = str_repeat('a', 20);
+		$this->post[Csrf\Csrf::NAME] = str_repeat('a', 20);
 		$csrf = new Csrf\StoredCsrf($this->session, $this->post, $this->get);
 		Assert::false($csrf->abused());
 	}
@@ -120,14 +124,16 @@ final class StoredCsrf extends Tester\TestCase {
 	}
 
 	public function testMatchingGetWithPrecedence() {
-		$this->session[Csrf\Csrf::NAME] = $this->get[Csrf\Csrf::NAME] = str_repeat('a', 22);
+		$this->session[Csrf\Csrf::NAME] = str_repeat('a', 22);
+		$this->get[Csrf\Csrf::NAME] = str_repeat('a', 22);
 		$this->post[Csrf\Csrf::NAME] = str_repeat('b', 30);
 		$csrf = new Csrf\StoredCsrf($this->session, $this->post, $this->get);
 		Assert::false($csrf->abused());
 	}
 
 	public function testRestartingSessionAfterProperProtection() {
-		$this->session[Csrf\Csrf::NAME] = $this->get[Csrf\Csrf::NAME] = str_repeat('a', 22);
+		$this->session[Csrf\Csrf::NAME] = str_repeat('a', 22);
+		$this->get[Csrf\Csrf::NAME] = str_repeat('a', 22);
 		$csrf = new Csrf\StoredCsrf($this->session, $this->post, $this->get);
 		Assert::count(1, $this->session);
 		Assert::false($csrf->abused());

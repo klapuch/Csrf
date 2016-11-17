@@ -16,8 +16,8 @@
   },
   "require-dev": {
 	"nette/tester": "^1.7",
-    "ext-simplexml": "*",
-    "ext-dom": "*"
+	"ext-simplexml": "*",
+	"ext-dom": "*"
   },
   "autoload": {
 	"psr-4": {

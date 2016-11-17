@@ -41,24 +41,28 @@ final class CsrfInput extends Tester\TestCase {
 	}
 
 	public function testProtectionAsValidXml() {
-		Assert::noError(function() {
-			new \SimpleXMLElement(
-				(new Csrf\CsrfInput(
-					new Csrf\FakeCsrf('&@\'<>="')
-				))->protection()
-			);
-		});
+		Assert::noError(
+			function() {
+				new \SimpleXMLElement(
+					(new Csrf\CsrfInput(
+						new Csrf\FakeCsrf('&@\'<>="')
+					))->protection()
+				);
+			}
+		);
 	}
 
 	public function testProtectionAsValidHtml() {
-		Assert::noError(function() {
-			$dom = new \DOMDocument();
-			$dom->loadHTML(
-				(new Csrf\CsrfInput(
-					new Csrf\FakeCsrf('&@\'<>="')
-				))->protection()
-			);
-		});
+		Assert::noError(
+			function() {
+				$dom = new \DOMDocument();
+				$dom->loadHTML(
+					(new Csrf\CsrfInput(
+						new Csrf\FakeCsrf('&@\'<>="')
+					))->protection()
+				);
+			}
+		);
 	}
 
 	public function testProperlyEncodedAccordingToInput() {
