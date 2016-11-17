@@ -1,0 +1,30 @@
+{
+  "name": "klapuch/csrf",
+  "description": "Protection against CSRF in multiple forms",
+  "type": "library",
+  "homepage": "https://github.com/klapuch/Csrf",
+  "authors": [
+	{
+	  "name": "Dominik Klapuch",
+	  "email": "klapuchdominik@gmail.com",
+	  "homepage": "https://www.github.com/klapuch",
+	  "role": "Developer"
+	}
+  ],
+  "require": {
+	"php": ">=7.1"
+  },
+  "require-dev": {
+	"nette/tester": "^1.7",
+    "ext-simplexml": "*",
+    "ext-dom": "*"
+  },
+  "autoload": {
+	"psr-4": {
+	  "Klapuch\\Csrf\\": [
+		"Core/",
+		"Tests/"
+	  ]
+	}
+  }
+}

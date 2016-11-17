@@ -1,0 +1,38 @@
+sudo: required
+dist: trusty
+
+language: php
+
+php:
+  - 7.1
+
+env:
+  - PHP_BIN="php-cgi"
+
+matrix:
+    include:
+        - php: 7.1
+          env: coverage="--coverage ./coverage.xml --coverage-src ./Core" PHP_BIN=phpdbg
+
+before_install:
+  - composer self-update
+
+install:
+  - composer install --no-interaction --prefer-source
+
+after_script:
+    - >
+      if [ "$coverage" != "" ]; then
+      wget https://github.com/satooshi/php-coveralls/releases/download/v1.0.1/coveralls.phar
+      && php coveralls.phar --verbose --config Tests/.coveralls.yml
+      || true; fi
+
+script:
+  - ./vendor/bin/tester -p $PHP_BIN -o console -s $coverage ./Tests/
+
+after_failure:
+  - for i in $(find Tests -name \*.actual); do echo "--- $i"; cat $i; echo; echo; done
+
+cache:
+    directories:
+      - $HOME/.composer/cache
