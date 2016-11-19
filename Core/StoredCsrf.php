@@ -58,6 +58,6 @@ final class StoredCsrf implements Csrf {
 	 * @return string
 	 */
 	private function twin(): string {
-		return ($this->get + $this->post)[self::NAME] ?? self::INVALID_TOKEN;
+		return ($this->post + $this->get)[self::NAME] ?? self::INVALID_TOKEN;
 	}
 }

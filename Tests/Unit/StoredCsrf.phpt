@@ -128,10 +128,10 @@ final class StoredCsrf extends Tester\TestCase {
 		Assert::true($csrf->abused());
 	}
 
-	public function testMatchingGetWithPrecedence() {
+	public function testMatchingPostWithPrecedence() {
 		$this->session[Csrf\Csrf::NAME] = str_repeat('a', 22);
-		$this->get[Csrf\Csrf::NAME] = str_repeat('a', 22);
-		$this->post[Csrf\Csrf::NAME] = str_repeat('b', 30);
+		$this->get[Csrf\Csrf::NAME] = str_repeat('b', 30);
+		$this->post[Csrf\Csrf::NAME] = str_repeat('a', 22);
 		$csrf = new Csrf\StoredCsrf($this->session, $this->post, $this->get);
 		Assert::false($csrf->abused());
 	}
