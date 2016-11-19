@@ -3,7 +3,7 @@
  * @testCase
  * @phpVersion > 7.1
  */
-namespace Klapuch\Unit\Csrf;
+namespace Klapuch\Csrf\Unit;
 
 use Klapuch\Csrf;
 use Tester;

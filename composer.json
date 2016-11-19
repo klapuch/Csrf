@@ -24,8 +24,7 @@
   "autoload": {
 	"psr-4": {
 	  "Klapuch\\Csrf\\": [
-		"Core/",
-		"Tests/"
+		"Core/"
 	  ]
 	}
   }
