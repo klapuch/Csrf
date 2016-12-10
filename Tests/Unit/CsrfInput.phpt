@@ -67,9 +67,9 @@ final class CsrfInput extends Tester\TestCase {
 
 	public function testProperlyEncodedAccordingToInput() {
 		Assert::contains(
-			'&amp;@&apos;&lt;&gt;=&quot;',
+			'&amp;&apos;&lt;&gt;&quot;',
 			(new Csrf\CsrfInput(
-				new Csrf\FakeCsrf('&@\'<>="')
+				new Csrf\FakeCsrf('&\'<>"')
 			))->protection()
 		);
 	}

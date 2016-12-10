@@ -18,8 +18,7 @@ final class CsrfInput implements Csrf {
 			self::NAME,
 			htmlspecialchars(
 				$this->origin->protection(),
-				ENT_XML1 | ENT_QUOTES,
-				'UTF-8'
+				ENT_XHTML | ENT_QUOTES
 			)
 		);
 	}
