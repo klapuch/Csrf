@@ -28,6 +28,14 @@ final class StoredCsrf extends Tester\TestCase {
 			$this->get
 		))->protection();
 		Assert::match('~^[a-z0-9]+$~i', $protection);
+	}
+
+	public function testGeneratedLongEnoughProtection() {
+		$protection = (new Csrf\StoredCsrf(
+			$this->session,
+			$this->post,
+			$this->get
+		))->protection();
 		Assert::true(strlen($protection) >= 20);
 	}
 
@@ -41,7 +49,7 @@ final class StoredCsrf extends Tester\TestCase {
 		Assert::same($oldSession, $newSession);
 	}
 
-	public function testStoringProtection() {
+	public function testStoringProtectionToAppropriateStorage() {
 		(new Csrf\StoredCsrf(
 			$this->session,
 			$this->post,
@@ -61,7 +69,7 @@ final class StoredCsrf extends Tester\TestCase {
 		Assert::contains($protection, $this->session);
 	}
 
-	public function testNoProvidedProtection() {
+	public function testAbusingOnNoProvidedProtection() {
 		Assert::true(
 			(new Csrf\StoredCsrf(
 				$this->session,
@@ -71,7 +79,7 @@ final class StoredCsrf extends Tester\TestCase {
 		);
 	}
 
-	public function testNoMatchingProtectionInPostOrGet() {
+	public function testAbusingOnNoMatchingProtectionInPostOrGet() {
 		$csrf = new Csrf\StoredCsrf($this->session, $this->post, $this->get);
 		$csrf->protection();
 		Assert::true($csrf->abused());
