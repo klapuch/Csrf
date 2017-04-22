@@ -16,10 +16,7 @@ final class Input implements Protection {
 		return sprintf(
 			'<input type="hidden" name="%s" value="%s" />',
 			self::NAME,
-			htmlspecialchars(
-				$this->origin->coverage(),
-				ENT_XHTML | ENT_QUOTES
-			)
+			htmlspecialchars($this->origin->coverage(), ENT_XHTML | ENT_QUOTES)
 		);
 	}
 

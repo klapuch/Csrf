@@ -34,7 +34,7 @@ final class Memory implements Protection {
 	 */
 	private function token(): string {
 		$token = '';
-		while(!$this->solid($token)) {
+		while (!$this->solid($token)) {
 			$token .= preg_replace(
 				'~[^\w\d]~',
 				'',
