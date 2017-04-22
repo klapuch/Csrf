@@ -2,7 +2,7 @@
 declare(strict_types = 1);
 namespace Klapuch\Csrf;
 
-final class FakeCsrf implements Csrf {
+final class FakeProtection implements Protection {
 	private $protection;
 	private $abused;
 
@@ -14,11 +14,11 @@ final class FakeCsrf implements Csrf {
 		$this->abused = $abused;
 	}
 
-	public function protection(): string {
+	public function coverage(): string {
 		return $this->protection;
 	}
 
-	public function abused(): bool {
+	public function attacked(): bool {
 		return $this->abused;
 	}
 }

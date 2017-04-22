@@ -11,32 +11,32 @@ use Tester\Assert;
 
 require __DIR__ . '/../bootstrap.php';
 
-final class CsrfInput extends Tester\TestCase {
+final class Input extends Tester\TestCase {
 	public function testHiddenInput() {
 		Assert::contains(
 			'<input type="hidden"',
-			(new Csrf\CsrfInput(new Csrf\FakeCsrf('abc123')))->protection()
+			(new Csrf\Input(new Csrf\FakeProtection('abc123')))->coverage()
 		);
 	}
 
 	public function testPassedValue() {
 		Assert::contains(
 			'value="abc123"',
-			(new Csrf\CsrfInput(new Csrf\FakeCsrf('abc123')))->protection()
+			(new Csrf\Input(new Csrf\FakeProtection('abc123')))->coverage()
 		);
 	}
 
 	public function testNamedInput() {
 		Assert::match(
 			'~name="[_\S]+"~',
-			(new Csrf\CsrfInput(new Csrf\FakeCsrf('abc123')))->protection()
+			(new Csrf\Input(new Csrf\FakeProtection('abc123')))->coverage()
 		);
 	}
 
 	public function testEnclosingElement() {
 		Assert::contains(
 			'/>',
-			(new Csrf\CsrfInput(new Csrf\FakeCsrf('abc123')))->protection()
+			(new Csrf\Input(new Csrf\FakeProtection('abc123')))->coverage()
 		);
 	}
 
@@ -44,9 +44,9 @@ final class CsrfInput extends Tester\TestCase {
 		Assert::noError(
 			function() {
 				new \SimpleXMLElement(
-					(new Csrf\CsrfInput(
-						new Csrf\FakeCsrf('&@\'<>="')
-					))->protection()
+					(new Csrf\Input(
+						new Csrf\FakeProtection('&@\'<>="')
+					))->coverage()
 				);
 			}
 		);
@@ -57,9 +57,9 @@ final class CsrfInput extends Tester\TestCase {
 			function() {
 				$dom = new \DOMDocument();
 				$dom->loadHTML(
-					(new Csrf\CsrfInput(
-						new Csrf\FakeCsrf('&@\'<>="')
-					))->protection()
+					(new Csrf\Input(
+						new Csrf\FakeProtection('&@\'<>="')
+					))->coverage()
 				);
 			}
 		);
@@ -68,11 +68,11 @@ final class CsrfInput extends Tester\TestCase {
 	public function testProperlyEncodedAccordingToInput() {
 		Assert::contains(
 			'&amp;&apos;&lt;&gt;&quot;',
-			(new Csrf\CsrfInput(
-				new Csrf\FakeCsrf('&\'<>"')
-			))->protection()
+			(new Csrf\Input(
+				new Csrf\FakeProtection('&\'<>"')
+			))->coverage()
 		);
 	}
 }
 
-(new CsrfInput())->run();
+(new Input())->run();

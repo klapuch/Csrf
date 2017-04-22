@@ -5,25 +5,25 @@ namespace Klapuch\Csrf;
 /**
  * CSRF suitable for usage in input form
  */
-final class CsrfInput implements Csrf {
+final class Input implements Protection {
 	private $origin;
 
-	public function __construct(Csrf $origin) {
+	public function __construct(Protection $origin) {
 		$this->origin = $origin;
 	}
 
-	public function protection(): string {
+	public function coverage(): string {
 		return sprintf(
 			'<input type="hidden" name="%s" value="%s" />',
 			self::NAME,
 			htmlspecialchars(
-				$this->origin->protection(),
+				$this->origin->coverage(),
 				ENT_XHTML | ENT_QUOTES
 			)
 		);
 	}
 
-	public function abused(): bool {
-		return $this->origin->abused();
+	public function attacked(): bool {
+		return $this->origin->attacked();
 	}
 }

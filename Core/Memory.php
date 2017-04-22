@@ -5,7 +5,7 @@ namespace Klapuch\Csrf;
 /**
  * CSRF stored across SESSION, POST and GET server variables
  */
-final class StoredCsrf implements Csrf {
+final class Memory implements Protection {
 	private const TOKEN_LENGTH = 20;
 	private const INVALID_TOKEN = '';
 	private $session;
@@ -18,11 +18,11 @@ final class StoredCsrf implements Csrf {
 		$this->get = $get;
 	}
 
-	public function protection(): string {
+	public function coverage(): string {
 		return $this->session[self::NAME] = $this->session[self::NAME] ?? $this->token();
 	}
 
-	public function abused(): bool {
+	public function attacked(): bool {
 		$token = $this->session[self::NAME] ?? self::INVALID_TOKEN;
 		unset($this->session[self::NAME]);
 		return !$this->solid($token) || !hash_equals($token, $this->twin());
