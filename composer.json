@@ -20,7 +20,7 @@
     "ext-dom": "*",
     "jakub-onderka/php-parallel-lint": "^0.9.2",
     "slevomat/coding-standard": "^2.0.0",
-    "sebastian/phpcpd": "^2.0",
+    "sebastian/phpcpd": "^4.0",
     "phing/phing": "^2.16",
     "consistence/coding-standard": "^0.13.0",
     "phpstan/phpstan": "^0.7.0"
